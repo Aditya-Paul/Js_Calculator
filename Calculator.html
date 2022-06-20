@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel = "stylesheet" href = "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="Calculator.css">
+</head>
+<body>
+    <div id="display"></div>
+    <!-- <input type="text" id="display" value=""></input> -->
+
+    <div id="buttons_part">
+        <div>
+            <button class="digit">AC</button>
+        </div>
+        <div>
+            <button class="digit">7</button>
+            <button class="digit">8</button>
+            <button class="digit">9</button>
+            <button class="digit">+</button>
+        </div>
+        <div>
+            <button class="digit">4</button>
+            <button class="digit">5</button>
+            <button class="digit">6</button>
+            <button class="digit">-</button>
+        </div>
+        <div>
+            <button class="digit">1</button>
+            <button class="digit">2</button>
+            <button class="digit">3</button>
+            <button class="digit">X</button>
+        </div>
+        <div>
+            <button class="digit">0</button>
+            <button class="digit">.</button>
+            <button class="digit" id="equal">=</button>
+            <button class="digit">÷</button>
+        </div>
+
+    </div>
+    <script>
+        //click on digit
+        var display = document.getElementById ('display')
+        var click_digit = document.querySelectorAll(".digit")
+        // var click_operator = document.querySelectorAll(".operator")
+        var allsymbols = [ '+', '-', 'AC', 'X', '÷','=' ]
+       
+        var firstvalue = ''
+        var secondvalue =  ''
+        var symbol = ''
+        var result = ''
+
+        function calculate(){
+            firstvalue = parseFloat(firstvalue)
+            secondvalue = parseFloat(secondvalue)
+            if (symbol === '+' ){
+                result = firstvalue + secondvalue
+            }
+            else if (symbol === '-' ){
+                result = firstvalue - secondvalue
+            }
+            else if (symbol === 'X' ){
+                result = firstvalue * secondvalue
+            }
+            else if (symbol === '÷' ){
+                result = firstvalue / secondvalue
+            }
+           
+            display.innerText = result
+            // firstvalue = result
+            // secondvalue = ''
+        }
+        
+        for (var digit of click_digit) {
+            digit.addEventListener('click', function () {
+            console.log('digit clicked'); 
+            var buttonNumber=this.innerText;
+            display.innerText += buttonNumber
+
+            var btnvalueissymbol = allsymbols.includes(buttonNumber)
+
+            if (buttonNumber =='AC'){
+                firstvalue=''
+                secondvalue = ''
+                result = ''
+                return display.innerText = ''
+            }
+            if (firstvalue && btnvalueissymbol){
+                // secondvalue && calculate()
+                
+                if(secondvalue){
+                    calculate()
+                    console.log(secondvalue)
+                }
+                symbol = buttonNumber
+                
+                console.log(firstvalue)
+                console.log(symbol)
+            }
+             else if(!symbol) firstvalue += buttonNumber
+            else if(symbol) secondvalue += buttonNumber
+
+            // console.log('this is',firstvalue)
+            console.log(btnvalueissymbol); 
+         })
+        }
+
+        // var click_digit = document.querySelectorAll('.digit');
+
+        // var display = document.getElementById('display');
+
+        // for(var i=0;i<click_digit.length;i++){
+        //     var digit=click_digit[i]
+        //     console.log(digit)
+        //     digit.addEventListener('click',function(event){
+        //         var buttonNumber=this.innerText;
+        //         var num=parseFloat(buttonNumber)
+        //         display.innerText +=num
+        //     })
+        // }
+    
+        //click on operator
+        // var click_operator = document.querySelectorAll(".operator")
+        // for (var operator of click_operator) {
+        //     operator.addEventListener('click', function () {
+        //     console.log(' clicked');
+        //     var Operator = this.innerText;
+        //     display.innerText = display.innerText + Operator
+        //  });
+        // }
+        // //click on click on equal
+        // var click_equal = document.getElementById ("equal")
+        // click_equal.addEventListener('click',function(){
+        // console.log('8')
+        // let x = document.getElementById("display").value
+        
+        // console.log(x)
+        // let y = eval(x)
+        // document.getElementById("display").value = y
+        // })
+
+       
+        
+        
+    </script>
+</body>
+</html>
